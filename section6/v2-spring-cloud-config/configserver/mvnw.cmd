@@ -51,7 +51,7 @@ Step to integrate config server:
 
 
    Note : ==> we need to keep application name(spring.application.name=accounts) must be
-   "accounts", because based on this name we have create corresponding yml file.
+   "accounts",in configserver project cofig folder, because based on this name we have create corresponding yml file.
     Syntax :
        <spring.application.name>.yml
        <spring.application.name>-qa.yml
