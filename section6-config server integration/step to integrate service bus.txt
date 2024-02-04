@@ -1,0 +1,39 @@
+Step to integrate service bus :
+
+If any changes happns in config server then without restart MS, when hit /busrefresh then config server
+notify all other MS.
+
+1. add below dependency in all MS:
+
+<dependency>
+	<groupId>org.springframework.cloud</groupId>
+	<artifactId>spring-cloud-starter-bus-amqp</artifactId>
+</dependency>
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-actuator</artifactId>
+</dependency>
+
+2. Then install rabitMQ and add below configuration in all MS including config server also:
+
+ rabbitmq:
+     host: "localhost"
+     port: 5672
+     username: "guest"
+     password: "guest"
+
+ management:
+   endpoints:
+     web:
+       exposure:
+         include: "*"
+
+ 3. then hit localhost:8080/actuator/busrefresh in any MS
+ Then automatically config server published changes to all MS.
+
+
+ Not : So due to this if any changes happnes in config server yml then we no need to restart
+ all other MS to reflect latest changes.
+
+
+

@@ -20,6 +20,7 @@ spring:
     show-sql: true
   config:
     import: "optional:configserver:http://localhost:8071/"
+#add this configuration for bus to refesh all ms after any changes in configserver project yml
   rabbitmq:
     host: "localhost"
     port: 5672
