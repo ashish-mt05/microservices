@@ -5,6 +5,8 @@ import lombok.*;
 
 @Entity
 @Getter @Setter @ToString @AllArgsConstructor @NoArgsConstructor
+//don't use @data on entity level, because internally it s generate hashcode and equals()
+//which cause issue sometime in spring data jpa.
 public class Accounts extends  BaseEntity {
 
     @Column(name="customer_id")

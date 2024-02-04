@@ -2,8 +2,8 @@ spring:
   application:
     name: "configserver"
   profiles:
-    # active: native
-    active: git
+    # active: native  ==> if we want to use yml file location as local
+    active: git  # use yml file location as git
   cloud:
     config:
       server:

@@ -15,23 +15,23 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
+@EntityListeners(AuditingEntityListener.class)  //STEP-4::this is for enable auditing
 @Getter @Setter @ToString
 public class BaseEntity {
 
-    @CreatedDate
+    @CreatedDate //STEP-4::need to add for auditing
     @Column(updatable = false)
     private LocalDateTime createdAt;
 
-    @CreatedBy
+    @CreatedBy //STEP-4::need to add for auditing
     @Column(updatable = false)
     private String createdBy;
 
-    @LastModifiedDate
+    @LastModifiedDate //STEP-4::need to add for auditing
     @Column(insertable = false)
     private LocalDateTime updatedAt;
 
-    @LastModifiedBy
+    @LastModifiedBy //STEP-4::need to add for auditing
     @Column(insertable = false)
     private String updatedBy;
 }
