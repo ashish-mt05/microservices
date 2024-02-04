@@ -9,7 +9,7 @@ Step to integrate config server:
    	</dependency>
 
 3. Create one folder with config and create multiple yml file for each project(local, qa, prod, etc)
-3. add configuration in yml file.
+4. add configuration in yml file.
    # if we want to use local yml file(active: native).
 
    spring:
@@ -39,6 +39,25 @@ Step to integrate config server:
              clone-on-start: true
              force-pull: true
 
+5. add below dependency in accounts project:
+
+      <dependency>
+      			<groupId>org.springframework.cloud</groupId>
+      			<artifactId>spring-cloud-starter-config</artifactId>
+      </dependency>
+
+      <dependencyManagement>
+      		<dependencies>
+      			<dependency>
+      				<groupId>org.springframework.cloud</groupId>
+      				<artifactId>spring-cloud-dependencies</artifactId>
+      				<version>${spring-cloud.version}</version>
+      				<type>pom</type>
+      				<scope>import</scope>
+      			</dependency>
+      		</dependencies>
+      	</dependencyManagement>
+
 5. goto accounts project, and do following setup in yml file.
 
    spring:
@@ -62,3 +81,4 @@ Step to integrate config server:
        accounts-qa.yml
 
    based on application we need to create yml file.
+
