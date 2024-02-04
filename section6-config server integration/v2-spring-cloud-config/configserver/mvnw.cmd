@@ -125,3 +125,48 @@ Step to integrate config server:
       ]
       }
 
+
+Step to encrypt properties in yml file:
+
+1. put below configuration in configserver yml file.configserver
+
+   encrypt:
+     key: "45D81EC1EF61DF9AD8D3E5BB397F9"
+
+2. then import below curl in postman:
+
+   curl --location 'http://localhost:8071/encrypt' \
+   --header 'Content-Type: text/plain' \
+   --data-raw 'aishwarya@eazybank.com'
+
+   Note : in postman body select raw data.
+
+   and try to hit, once you hit above api then you will get encrypted data.
+   and put that encrypted data where yuo want to put.
+
+   Ex:
+
+   accounts:
+     message: "Welcome to EazyBank accounts related prod APIs "
+     contactDetails:
+       name: "Reine Aishwarya - Product Owner"
+       email: "aishwarya@eazybank.com"
+     onCallSupport:
+       - (453) 392-4829
+       - (236) 203-0384
+
+    let encrypt aishwarya@eazybank.com mail id.
+
+    with this email id hit above api. you will get encrypted data. then replace plane email with encrypted data.
+
+    accounts:
+         message: "Welcome to EazyBank accounts related prod APIs "
+         contactDetails:
+           name: "Reine Aishwarya - Product Owner"
+           email: "bdsaddasslfsfdslgsjNDJDASKSKLKSDVSDVDSVSDMVMKJDV"
+         onCallSupport:
+           - (453) 392-4829
+           - (236) 203-0384
+
+
+           and when you hit account service then you will get decrypted email.
