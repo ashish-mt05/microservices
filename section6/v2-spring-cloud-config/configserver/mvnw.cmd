@@ -46,6 +46,7 @@ Step to integrate config server:
       			<artifactId>spring-cloud-starter-config</artifactId>
       </dependency>
 
+      # it is provide integration.
       <dependencyManagement>
       		<dependencies>
       			<dependency>
