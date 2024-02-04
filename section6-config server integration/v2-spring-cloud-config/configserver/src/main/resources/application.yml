@@ -9,7 +9,7 @@ spring:
       server:
         # native:
           # search-locations: "classpath:/config"
-          # search-locations: "file:///Users//eazybytes//Documents//config"
+          # search-locations: "file:///Users//eazybytes//Documents//config" ==> external yml file(we can put yml any location)
         git:
           uri: "https://github.com/eazybytes/eazybytes-config.git"
           default-label: main

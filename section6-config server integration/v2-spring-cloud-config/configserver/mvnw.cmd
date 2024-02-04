@@ -34,9 +34,9 @@ Step to integrate config server:
          server:
            git:
              uri: "https://github.com/eazybytes/eazybytes-config.git"
-             default-label: main
-             timeout: 5
-             clone-on-start: true
+             default-label: main  ==> here put branch name
+             timeout: 5  ==> configserver wait fot  5 sec to connect with github server else through error.
+             clone-on-start: true ==> true means config server clone github repo while server start up. if false means cloning happens while first request came to config server.
              force-pull: true
 
 5. add below dependency in accounts project:
@@ -82,4 +82,46 @@ Step to integrate config server:
        accounts-qa.yml
 
    based on application we need to create yml file.
+
+
+ 7. then verify by starting both configserver and accounts application server.
+    localhost: 88071/<spring.application.name>/<environment>
+    Ex:
+      localhost:88071/accounts/qa
+      here you will get all configuration in json format.
+      response ::
+
+      {
+      "name": "accounts",
+      "profiles": [
+      "qa"
+      ],
+      "label": null,
+      "version": "a718ea09891c741b1d8545cecc3fde6c7b262a51",
+      "state": null,
+      "propertySources": [
+      {
+      "name": "https://github.com/eazybytes/eazybytes-config.git/accounts-qa.yml",   ==> location of all application yml file.
+      "source": {
+      "build.version": "2.0",
+      "accounts.message": "Welcome to EazyBank accounts related QA APIs ",
+      "accounts.contactDetails.name": "Smitha Ray - QA Lead",
+      "accounts.contactDetails.email": "smitha@eazybank.com",
+      "accounts.onCallSupport[0]": "(666) 265-3765",
+      "accounts.onCallSupport[1]": "(666) 734-8371"
+      }
+      },
+      {
+      "name": "https://github.com/eazybytes/eazybytes-config.git/accounts.yml", ==> location of all application yml file.
+      "source": {
+      "build.version": "3.0",
+      "accounts.message": "Welcome to EazyBank accounts related docker APIs ",
+      "accounts.contactDetails.name": "John Doe - Developer",
+      "accounts.contactDetails.email": "john@eazybank.com",
+      "accounts.onCallSupport[0]": "(555) 555-1234",
+      "accounts.onCallSupport[1]": "(555) 523-1345"
+      }
+      }
+      ]
+      }
 
