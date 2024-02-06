@@ -1,3 +1,4 @@
+#config server configuration start
 spring:
   application:
     name: "configserver"
@@ -16,20 +17,24 @@ spring:
           timeout: 5
           clone-on-start: true
           force-pull: true
+#for service bus
   rabbitmq:
     host: "localhost"
     port: 5672
     username: "guest"
     password: "guest"
-
+#actutaor
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+#this properties monitor health of configserver application
   health:
+    #check config server application is able to accept request or not
     readiness-state:
       enabled: true
+    #check config server application is up or not
     liveness-state:
       enabled: true
   endpoint:
@@ -39,6 +44,6 @@ management:
 #used to encrypt properties value.
 encrypt:
   key: "45D81EC1EF61DF9AD8D3E5BB397F9"
-
+#config server configuration end
 server:
   port: 8071

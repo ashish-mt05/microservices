@@ -1,0 +1,56 @@
+Spring Data JPA internally provide auditing feature.
+
+Step integrate auditing:
+
+1. Create one class by implementing AuditorAware interface.
+
+@Component("auditAwareImpl")
+public class AuditAwareImpl implements AuditorAware<String> {
+   // here in AuditorAware<String> we put data type of createBy filed.
+
+    /**
+     * Returns the current auditor of the application.
+     *
+     * @return the current auditor.
+     */
+    @Override
+    public Optional<String> getCurrentAuditor() {
+        //what data you need to set createdBy and updatedBy field of baseEntity class.
+        return Optional.of("ACCOUNTS_MS");
+    }
+
+}
+
+2. to Enable JpaAuditing we need to @EnableJpaAuditing on main class.
+
+@EnableJpaAuditing(auditorAwareRef = "auditAwareImpl")
+public class AccountsApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(AccountsApplication.class, args);
+	}
+}
+
+3. create on base entity nd add @EntityListeners annotation and register AuditingEntityListener
+
+@MappedSuperclass
+@EntityListeners(AuditingEntityListener.class)
+@Getter @Setter @ToString
+public class BaseEntity {
+
+    @CreatedDate
+    @Column(updatable = false) ==> dont allow to update only allow insertion
+    private LocalDateTime createdAt;
+
+    @CreatedBy
+    @Column(updatable = false) ==> dont allow to update only allow insertion
+    private String createdBy;
+
+    @LastModifiedDate
+    @Column(insertable = false) ==> dont allow to insertion only allow update
+    private LocalDateTime updatedAt;
+
+    @LastModifiedBy
+    @Column(insertable = false) ==> dont allow to insertion only allow update
+    private String updatedBy;
+}

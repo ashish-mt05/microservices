@@ -25,10 +25,10 @@ services:
         condition: service_healthy
     healthcheck:
       test: "curl --fail --silent localhost:8071/actuator/health/readiness | grep UP || exit 1"
-      interval: 10s
-      timeout: 5s
-      retries: 10
-      start_period: 10s
+      interval: 10s # if failure then retries intervals of 10 sec
+      timeout: 5s #wait for 5 sec
+      retries: 10   #if failure then retries 10 time
+      start_period: 10s  #start above health check command after 10sec.
     extends:
       file: common-config.yml
       service: microservice-base-config

@@ -1,0 +1,13 @@
+1. add openfeign dependecny.
+2. put @EnableFeignClient annotation on top of main class.
+3. create one interface nd top of that put @FeignClient
+and then pass spring.application.name as parameter.
+4. create on method same as we have created in CardController
+
+@FeignClient("cards")
+public interface CardsFeignClient {
+
+    @GetMapping(value = "/api/fetch",consumes = "application/json")
+    public ResponseEntity<CardsDto> fetchCardDetails(@RequestParam String mobileNumber);
+
+}

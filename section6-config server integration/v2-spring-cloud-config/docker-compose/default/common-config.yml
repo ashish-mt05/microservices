@@ -16,6 +16,9 @@ services:
   microservice-configserver-config:
     extends:
       service: microservice-base-config
+    # depends_on only wait til service got initiated not complete server started
+    # so due to this we need to put some condition also with depends_on.
+    #we want once configserver started healthy then only account or other MS try to start
     depends_on:
       configserver:
         condition: service_healthy
